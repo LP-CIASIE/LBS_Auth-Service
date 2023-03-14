@@ -1,0 +1,12 @@
+{
+    "require" : {
+      "mongodb/mongodb": "^1.8"
+    }  ,
+    "autoload": {
+      "psr-4" : {
+        "lbs\\auth\\" : "./src/"
+  
+      }
+  
+    }
+}
