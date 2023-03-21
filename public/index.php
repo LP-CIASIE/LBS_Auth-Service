@@ -1,7 +1,30 @@
 <?php
 
-require_once "../src/vendor/autoload.php";
+declare(strict_types=1);
 
-$c = new \MongoDB\Client("mongodb://mongo:27017");
-$db = $c->catalogue;
-$sandwichesDb = $db->sandwiches;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory as Appfactory;
+use lbs\auth\middleware\TokenMiddleware as TokenMiddleware;
+
+
+require_once "../vendor/autoload.php";
+
+$app = AppFactory::create();
+
+$app->addRoutingMiddleware();
+$app->addBodyParsingMiddleware();
+
+// Default route
+$app->get('/', function (Request $request, Response $response, $args) {
+    $response->getBody()->write("bonjour :)");
+  
+    return $response;
+  });
+
+
+$app->post('/signin[/]', lbs\auth\actions\SignInAction::class)->add(new TokenMiddleware());
+
+$app->run();
+
+

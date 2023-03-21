@@ -1,6 +1,6 @@
 <?php
 
-namespace lbs\order\services\utils;
+namespace lbs\auth\services\utils;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
