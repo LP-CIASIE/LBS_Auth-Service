@@ -40,8 +40,6 @@ final class TokenService
         $params = require __DIR__ . '/../../data/settings.php';
         $secret = $params['JWT_SECRET'];
         $tokenDecoded = JWT::decode($token, new Key($secret, 'HS512'));
-        var_dump($tokenDecoded);
-        die;
 
       $data = [
         'token' => $tokenDecoded,
@@ -49,5 +47,6 @@ final class TokenService
       $response->getBody()->write(json_encode($data));
       return $response->withStatus(401)->withHeader('Content-Type', 'application/json');
     }
+
   
 }
